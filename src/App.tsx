@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import Search from './Search';
+import ImageDisplay from "./ImageDisplay";
+import {Image} from "./Image";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [images, setImages] = useState(new Array<Image>())
+
+    return (
+        <div className="App">
+            <Search setImages={setImages}/>
+            {
+                images.length > 0 ?
+                    images.map(image => <ImageDisplay key={image.url} image={image}/>)
+                    : <text>No images yet ):</text>
+            }
+        </div>
+    );
 }
 
 export default App;
